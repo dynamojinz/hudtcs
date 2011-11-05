@@ -1,0 +1,14 @@
+{% extends "base_layout.html" %}
+{% block title %} Hello, {{ request.user }} {% endblock %}
+{% block content %}
+<h1>Your teams</h1>
+{% if user_of_teams %}
+<ul>
+	{% for ut in user_of_teams %}
+	<li><a href="/teams/{{ ut.team.id }}/topics/list">{{ ut.team }}</a></li>
+	{% endfor %}
+</ul>
+{% else %}
+    <p>No teams are available.</p>
+{% endif %}
+{% endblock %}

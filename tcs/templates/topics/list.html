@@ -1,0 +1,14 @@
+{% extends "base_layout.html" %}
+{% block title %} Topics of team: {{ team_id }} {% endblock %}
+{% block content %}
+<h1>Topics of team:{{ team }}</h1>
+{% if team.topic_set %}
+<ul>
+	{% for topic in team.topic_set.all %}
+	<li><a href="/topics/{{ topic.id }}/follows/list">{{ topic }}</a></li>
+	{% endfor %}
+</ul>
+{% else %}
+    <p>No topics are available.</p>
+{% endif %}
+{% endblock %}
