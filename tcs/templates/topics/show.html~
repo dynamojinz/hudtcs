@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% load topic_extras %}
+
+{% block title %} 问题: {{ topic.title }} {% endblock %}
+
+{% block topbar %}
+<div id="topbar">
+	<a href="/">我的项目</a> >> 
+	<a href="/teams/{{topic.team.id}}/topics/list">{{topic.team}}</a> >> 
+	{{topic.title}}
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="topic">
+	<div class="title"> {{ topic.user }} : {{ topic.title }} </div>
+	<div class="body"> {{ topic.body }} </div>
+	<div class="reply">
+		<form method="get" action="/topics/{{topic.id}}/follow">
+		<input type="submit" value="我要回复" />
+		</form>
+	</div>
+</div>
+
+<div class="roles">
+<ul>
+	{% for role, f_list in follows.items %}
+	<li style="position:absolute; left:{{forloop.counter0|mul:250}}px;" class="colum" {%if forloop.last%}id="last"{%endif%}>
+	<h2>{{ role.name }}</h2>
+	<ul class="follows">
+		{% for follow in f_list %}
+		<li>[ {{ follow.user }} ]  {{ follow.body }}
+			{% if follow.attachment %}
+			(<a href="{{MEDIA_URL}}{{follow.attachment.url}}">附件</a>)
+			{% endif %}
+		</li>
+		{% endfor %}
+	</ul>
+	</li>
+	{% endfor %}
+</ul>
+</div>
+<p />
+{% endblock %}
+{% block footer %}
+{% endblock %}
+
+

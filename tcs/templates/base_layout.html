@@ -2,17 +2,19 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh_CN" lang="zh_CN">
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="style.css" />
-    <title>{% block title %}My amazing site{% endblock %}</title>
+    <title>{% block title %}团队协作系统{% endblock %}</title>
 </head>
 
 <body>
     <div id="sidebar">
-        {% block sidebar %}
-        <ul>
-            <li><a href="/">Home</a></li>
-        </ul>
-        {% endblock %}
+	<ul class="menu">
+		<li></li>
+		<li><a href="#">我参与的项目</a></li>
+		<li><a href="#">我参与人话题</a></li>
+		<li><a href="#">我的资料</a></li>
+	</ul>
     </div>
     <div id="content">
         {% block content %}{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title %} Topic: {{ topic }} {% endblock %}
+
+{% block topbar %}
+<div id="topbar">
+	<a href="/">我的项目</a> >> 
+	<a href="/teams/{{topic.team.id}}/topics/list">{{topic.team}}</a> >> 
+	<a href="/topics/{{topic.id}}/show">{{topic.title}}</a> >> 
+	回复
+</div>
+{% endblock %}
+
+{% block content %}
+
+<div class="topic">
+	<div class="title"> {{ topic.user }} : {{ topic.title }} </div>
+	<div class="body"> {{ topic.body }} </div>
+</div>
+
+
+<form action="" method="post" class="follow_form" enctype="multipart/form-data">
+	<div class="title">回复:</div> 
+	{% csrf_token %}
+	<div> {{ form.non_field_errors }} </div>
+	<div> {{ form.body.errors }} </div>
+	<div class="body">
+		{{ form.body }}
+	</div>
+	<div class="attachment">
+		附件：{{ form.attachment }} <span class="error">{{form.attachment.errors}}</span>
+	</div>
+	<div class="menu">
+		<input type="submit" value="回复">  <input type="reset" value="清空">  
+	</div>
+</form>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{% block title %} 与您有关的话题 {% endblock %}
+
+{% block content %}
+<div class="list">
+	<h2>我发起的话题</h2>
+<div class="title">
+	<span class="name">名称</span>
+	<span class="team">所属项目</span>
+	<span class="time">时间</span>
+	<span class="reply">回复</span>
+	<span class="last">内容</span>
+</div>
+{% if own_topics %}
+<ul>
+	{% for topic in own_topics %}
+	<li>
+	<span class="name"><a href="/topics/{{ topic.id }}/show">{{ topic }}</a></span>
+	<span class="team"><a href="/teams/{{topic.team.id}}/topics/list">{{ topic.team }}</a></span>
+	<span class="time">{{ topic.created|date:"Y/m/d H:i:s" }}</span>
+	<span class="reply">{{ topic.follow_set.all|length }}</span>
+	<span class="last">{{ topic.body }}</span>
+	</li>
+	{% endfor %}
+</ul>
+{% endif %}
+</div>
+<div class="list">
+	<h2>我参与的话题</h2>
+<div class="title">
+	<span class="name">名称</span>
+	<span class="team">所属项目</span>
+	<span class="user">发起人</span>
+	<span class="time">时间</span>
+	<span class="reply">回复</span>
+	<span class="last">内容</span>
+</div>
+{% if follow_topics %}
+<ul>
+	{% for topic in follow_topics %}
+	<li>
+	<span class="name"><a href="/topics/{{ topic.id }}/show">{{ topic }}</a></span>
+	<span class="team"><a href="/teams/{{topic.team.id}}/topics/list">{{ topic.team }}</a></span>
+	<span class="user">{{ topic.user }}</span>
+	<span class="time">{{ topic.created|date:"Y/m/d H:i:s" }}</span>
+	<span class="reply">{{ topic.follow_set.all|length }}</span>
+	<span class="last">{{ topic.body }}</span>
+	</li>
+	{% endfor %}
+</ul>
+{% endif %}
+</div>
+{% endblock %}

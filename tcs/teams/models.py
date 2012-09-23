@@ -21,5 +21,5 @@ class UserOfTeam(models.Model):
     role = models.ForeignKey(Role)
 
     def __unicode__(self):
-        return "%s belongs to %s" % (self.user, self.team)
+        return u"%s belongs to %s, role:%s" % (self.user, self.team, self.role)
 

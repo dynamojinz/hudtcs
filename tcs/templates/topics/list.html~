@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block title %} Topics of team: {{ team_id }} {% endblock %}
+{% block topbar %}
+<a href="/">我的项目</a> >> 
+{{ team }}
+{% endblock %}
+
+{% block content %}
+<div class="list">
+
+<div class="title">
+	<span class="name">名称</span>
+	<span class="user">发起人</span>
+	<span class="time">时间</span>
+	<span class="reply">回复</span>
+	<span class="last">内容</span>
+</div>
+{% if team.topic_set %}
+<ul>
+	{% for topic in team.topic_set.all %}
+	<li>
+	<span class="name"><a href="/topics/{{ topic.id }}/show">{{ topic }}</a></span>
+	<span class="user">{{ topic.user }}</span>
+	<span class="time">{{ topic.created|date:"Y/m/d H:i:s" }}</span>
+	<span class="reply">{{ topic.follow_set.all|length }}</span>
+	<span class="last">{{ topic.body }}</span>
+	</li>
+	{% endfor %}
+</ul>
+{% endif %}
+<div class="menu">
+<form method="get" action="/topics/new/team/{{team.id}}">
+	<input type="submit" value="发表新话题"/>
+</form>
+</div>
+
+</div>
+{% endblock %}
